@@ -7,18 +7,13 @@ const Ably = require('ably');
 const PORT = process.env.PORT || 3000;
 const ABLY_API_KEY = process.env.ABLY_API_KEY;
 
-const ably = new Ably.Realtime(ABLY_API_KEY);
+const realtime = new Ably.Realtime(ABLY_API_KEY);
 
 const app = express();
 
+const channel = realtime.channels.get('data-sync');
 
-const channelName = 'data-sync';
-
-let channel = ably.channels.get(channelName);
-if (!channel) {
-    channel = ably.channels.create(channelName);
-}
-
+module.exports = { channel };
 
 app.use(express.json());
 app.use(cors());

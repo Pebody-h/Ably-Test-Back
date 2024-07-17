@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { createNumbersTable, insertNumber } = require('./models');
+const { channel } = require('./server'); 
 
 router.post('/create-table', async (req, res) => {
     try {
